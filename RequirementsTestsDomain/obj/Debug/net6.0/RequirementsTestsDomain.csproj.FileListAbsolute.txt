@@ -1,0 +1,12 @@
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/bin/Debug/net6.0/RequirementsTestsDomain.deps.json
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/bin/Debug/net6.0/RequirementsTestsDomain.dll
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/bin/Debug/net6.0/ref/RequirementsTestsDomain.dll
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/bin/Debug/net6.0/RequirementsTestsDomain.pdb
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/obj/Debug/net6.0/RequirementsTestsDomain.csproj.AssemblyReference.cache
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/obj/Debug/net6.0/RequirementsTestsDomain.GeneratedMSBuildEditorConfig.editorconfig
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/obj/Debug/net6.0/RequirementsTestsDomain.AssemblyInfoInputs.cache
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/obj/Debug/net6.0/RequirementsTestsDomain.AssemblyInfo.cs
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/obj/Debug/net6.0/RequirementsTestsDomain.csproj.CoreCompileInputs.cache
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/obj/Debug/net6.0/RequirementsTestsDomain.dll
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/obj/Debug/net6.0/ref/RequirementsTestsDomain.dll
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/obj/Debug/net6.0/RequirementsTestsDomain.pdb

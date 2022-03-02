@@ -1,0 +1,190 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsConsole/RequirementsTestsConsole.csproj": {}
+  },
+  "projects": {
+    "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsConsole/RequirementsTestsConsole.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsConsole/RequirementsTestsConsole.csproj",
+        "projectName": "RequirementsTestsConsole",
+        "projectPath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsConsole/RequirementsTestsConsole.csproj",
+        "packagesPath": "/home/anisimov/.nuget/packages/",
+        "outputPath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsConsole/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/anisimov/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/RequirementsTestsServices.csproj": {
+                "projectPath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/RequirementsTestsServices.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.2, 6.0.2]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.102/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/RequirementsTestsDomain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/RequirementsTestsDomain.csproj",
+        "projectName": "RequirementsTestsDomain",
+        "projectPath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/RequirementsTestsDomain.csproj",
+        "packagesPath": "/home/anisimov/.nuget/packages/",
+        "outputPath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/anisimov/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.2, 6.0.2]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.102/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/RequirementsTestsServices.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/RequirementsTestsServices.csproj",
+        "projectName": "RequirementsTestsServices",
+        "projectPath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/RequirementsTestsServices.csproj",
+        "packagesPath": "/home/anisimov/.nuget/packages/",
+        "outputPath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/anisimov/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/RequirementsTestsDomain.csproj": {
+                "projectPath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsDomain/RequirementsTestsDomain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.2, 6.0.2]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.102/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/bin/Debug/net6.0/RequirementsTestsServices.deps.json
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/bin/Debug/net6.0/RequirementsTestsServices.dll
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/bin/Debug/net6.0/ref/RequirementsTestsServices.dll
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/bin/Debug/net6.0/RequirementsTestsServices.pdb
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/bin/Debug/net6.0/RequirementsTestsDomain.dll
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/bin/Debug/net6.0/RequirementsTestsDomain.pdb
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/obj/Debug/net6.0/RequirementsTestsServices.csproj.AssemblyReference.cache
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/obj/Debug/net6.0/RequirementsTestsServices.GeneratedMSBuildEditorConfig.editorconfig
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/obj/Debug/net6.0/RequirementsTestsServices.AssemblyInfoInputs.cache
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/obj/Debug/net6.0/RequirementsTestsServices.AssemblyInfo.cs
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/obj/Debug/net6.0/RequirementsTestsServices.csproj.CoreCompileInputs.cache
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/obj/Debug/net6.0/RequirementsTestsServices.csproj.CopyComplete
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/obj/Debug/net6.0/RequirementsTestsServices.dll
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/obj/Debug/net6.0/ref/RequirementsTestsServices.dll
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/RequirementsTestsServices/obj/Debug/net6.0/RequirementsTestsServices.pdb
