@@ -1,3 +1,4 @@
+using System.Globalization;
 using RequirementsTestsDomain.Models;
 using RequirementsTestsServices.UseCases.Interfaces;
 
@@ -6,55 +7,131 @@ namespace RequirementsTestsServices.UseCases.LinuxInfo;
 public class HardwareInfo : IGetHardwareInfo
 {
     private const string CategoryName = "Hardware";
-    
-    public Info<string> GetVendorInfo()
+
+    private async Task<string> ReadToTheEndAsync(string path)
     {
-        using var sReader = new StreamReader(@"/sys/devices/virtual/dmi/id/board_vendor");
-        var vendorInfo = new Info<string>
+        using var sReader = new StreamReader(path);
+        return await sReader.ReadToEndAsync();
+    }
+
+    private Info<Dictionary<TKey,TValue>> GenerateInfo<TKey,TValue>(Dictionary<TKey,TValue> dictionary, string description = "For future needs")
+    {
+        var info = new Info<Dictionary<TKey, TValue>>
         {
             Category = new InfoCategory{Name = CategoryName},
-            Value = sReader.ReadToEnd(),
-            Description = "For future needs",
+            Value = dictionary,
+            Description = description,
         };
-        return vendorInfo;
+        return info;
     }
 
-    public Info<string> GetModelInfo()
+    private Info<T> GenerateInfo<T>(T value, string description = "For future needs")
+    {
+        var info = new Info<T>
+        {
+            Category = new InfoCategory{Name = CategoryName},
+            Value = value,
+            Description = description,
+        };
+        return info;
+    }
+
+    public async Task<Info<string>> GetVendorInfoAsync()
+    {
+        var value = await ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/board_vendor");
+        return GenerateInfo(value);
+    }
+
+    public async Task<Info<string>> GetModelInfoAsync()
+    {
+        var value = await ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/product_name");
+        return GenerateInfo(value);
+    }
+
+    public async Task<Info<string>> GetSerialNumberInfoAsync()
+    {
+        var value = await ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/product_serial");
+        return GenerateInfo(value);
+    }
+
+    public async Task<Info<Dictionary<string, long>>> GetRamInfoAsync(string[] keys)
+    {
+        var result = new Dictionary<string, long>();
+        using var sReader = new StreamReader(@"/proc/meminfo");
+        var count = 0;
+        while (!sReader.EndOfStream && count < keys.Length)
+        {
+            var str = await sReader.ReadLineAsync();
+            for (int i = 0; i < keys.Length; i++)
+            {
+                if (str!.Contains(keys[i]))
+                {
+                    long value;
+                    string strValue = str.Split(":")[1].Trim().Split(" ")[0];
+                    result.Add(keys[i], value = long.TryParse(strValue, out var val) ? val : default);
+                    count++;
+                }
+            }
+        }
+        
+        return GenerateInfo(result);
+    }
+
+    public async Task<Info<Dictionary<string, string>>> GetCpuInfoAsync(string[] keys)
+    {
+        var result = new Dictionary<string, string>();
+        using var sReader = new StreamReader(@"/proc/cpuinfo");
+        var count = 0;
+        while (!sReader.EndOfStream && count < keys.Length)
+        {
+            var str = await sReader.ReadLineAsync();
+            for (int i = 0; i < keys.Length; i++)
+            {
+                if (str!.Contains(keys[i]))
+                {
+                    string strValue = str.Split(":")[1].Trim();
+                    result.Add(keys[i], strValue);
+                    count++;
+                }
+            }
+        }
+        
+        return GenerateInfo(result);
+    }
+
+    public async Task<Info<Dictionary<string, string>>> GetDiskDriveInfoAsync()
+    {
+        var dirs = Directory.EnumerateDirectories("/sys/block/").Where(d => !d.Contains("loop"));
+        var result = new Dictionary<string, string>();
+        foreach (var dir in dirs)
+        {
+            var key = dir.Split("/").Last();
+            var value = await ReadToTheEndAsync($@"{dir}/device/model");
+            result.Add(key!,value);
+        }
+
+        return GenerateInfo(result);
+    }
+
+    public async Task<Info<Dictionary<string, string>>> GetFirmWareInfoAsync()
+    {
+        var result = new Dictionary<string, string>();
+        string[] keys = {"bios_version", "bios_vendor", "bios_release", "bios_date"};
+        foreach (var key in keys)
+        {
+            var value = await ReadToTheEndAsync($@"/sys/devices/virtual/dmi/id/{key}");
+            result.Add(key,value);
+        }
+
+        return GenerateInfo(result);
+    }
+
+    public Task<Info<Dictionary<string, string>>> GetLocalPrinterInfoAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Info<string> GetSerialNumberInfo()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Info<int> GetRamInfo()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Info<string> GetCpuInfo()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Info<string> GetDiskDriveInfo()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Info<string> GetFirmWareInfo()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Info<Dictionary<string, string>> GetLocalPrinterInfo()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Info<Dictionary<string, string>> GetNetworkPrinterInfo()
+    public Task<Info<Dictionary<string, string>>> GetNetworkPrinterInfoAsync()
     {
         throw new NotImplementedException();
     }
