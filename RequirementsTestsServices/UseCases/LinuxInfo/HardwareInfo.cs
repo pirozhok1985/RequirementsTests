@@ -14,10 +14,11 @@ public class HardwareInfo : IGetHardwareInfo
         return await sReader.ReadToEndAsync();
     }
 
-    private Info<Dictionary<TKey,TValue>> GenerateInfo<TKey,TValue>(Dictionary<TKey,TValue> dictionary, string description = "For future needs")
+    private Info<Dictionary<TKey,TValue>> GenerateInfo<TKey,TValue>(Dictionary<TKey,TValue> dictionary, string name, string description = "For future needs")
     {
         var info = new Info<Dictionary<TKey, TValue>>
         {
+            Name = name,
             Category = new InfoCategory{Name = CategoryName},
             Value = dictionary,
             Description = description,
@@ -25,10 +26,11 @@ public class HardwareInfo : IGetHardwareInfo
         return info;
     }
 
-    private Info<T> GenerateInfo<T>(T value, string description = "For future needs")
+    private Info<T> GenerateInfo<T>(T value, string name, string description = "For future needs")
     {
         var info = new Info<T>
         {
+            Name = name,
             Category = new InfoCategory{Name = CategoryName},
             Value = value,
             Description = description,
@@ -39,19 +41,19 @@ public class HardwareInfo : IGetHardwareInfo
     public async Task<Info<string>> GetVendorInfoAsync()
     {
         var value = await ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/board_vendor");
-        return GenerateInfo(value);
+        return GenerateInfo(value,"Vendor");
     }
 
     public async Task<Info<string>> GetModelInfoAsync()
     {
         var value = await ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/product_name");
-        return GenerateInfo(value);
+        return GenerateInfo(value,"Model");
     }
 
     public async Task<Info<string>> GetSerialNumberInfoAsync()
     {
         var value = await ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/product_serial");
-        return GenerateInfo(value);
+        return GenerateInfo(value,"Serial Number");
     }
 
     public async Task<Info<Dictionary<string, long>>> GetRamInfoAsync(string[] keys)
@@ -74,7 +76,7 @@ public class HardwareInfo : IGetHardwareInfo
             }
         }
         
-        return GenerateInfo(result);
+        return GenerateInfo(result,"Ram");
     }
 
     public async Task<Info<Dictionary<string, string>>> GetCpuInfoAsync(string[] keys)
@@ -96,7 +98,7 @@ public class HardwareInfo : IGetHardwareInfo
             }
         }
         
-        return GenerateInfo(result);
+        return GenerateInfo(result,"Cpu");
     }
 
     public async Task<Info<Dictionary<string, string>>> GetDiskDriveInfoAsync()
@@ -110,7 +112,7 @@ public class HardwareInfo : IGetHardwareInfo
             result.Add(key!,value);
         }
 
-        return GenerateInfo(result);
+        return GenerateInfo(result,"Disk");
     }
 
     public async Task<Info<Dictionary<string, string>>> GetFirmWareInfoAsync()
@@ -123,7 +125,7 @@ public class HardwareInfo : IGetHardwareInfo
             result.Add(key,value);
         }
 
-        return GenerateInfo(result);
+        return GenerateInfo(result,"Bios");
     }
 
     public Task<Info<Dictionary<string, string>>> GetLocalPrinterInfoAsync()
