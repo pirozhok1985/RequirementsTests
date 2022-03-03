@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RequirementsTestsDomain.Models;
@@ -10,15 +11,17 @@ namespace RequirementsTestsServices.Tests;
 public class HardwareInfoTests
 {
     [TestMethod]
-    public async Task CheckIfGetModelInfoReturnsCorrectValue()
+    public async Task CheckIfReturnsCorrectValue()
     {
         var expectedCategory = "Hardware";
-        var expectedName = "Model";
 
-        var result = await new HardwareInfo().GetModelInfoAsync();
+        var resultModel = await new HardwareInfo().GetModelInfoAsync();
+        var resultRam = await new HardwareInfo().GetRamInfoAsync(new[] {"MemTotal","MemFree","Mapped"});
 
-        Assert.IsType<Info<string>>(result);
-        Assert.Equal(expectedCategory,result.Category.Name);
-        Assert.Equal(expectedName,result.Name);
+        Assert.IsType<Info<string>>(resultModel);
+        Assert.Equal(expectedCategory,resultModel.Category.Name);
+
+        Assert.IsType<Info<Dictionary<string,long>>>(resultRam);
+        Assert.Equal(expectedCategory,resultRam.Category.Name);
     }
 }
