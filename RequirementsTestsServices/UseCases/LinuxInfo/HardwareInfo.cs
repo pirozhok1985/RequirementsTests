@@ -52,8 +52,15 @@ public class HardwareInfo : IGetHardwareInfo
 
     public async Task<Info<string>> GetSerialNumberInfoAsync()
     {
-        var value = await ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/product_serial");
-        return GenerateInfo(value,"Serial Number");
+        try
+        {
+            var value = await ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/product_serial");
+            return GenerateInfo(value,"Serial Number");
+        }
+        catch (IOException e)
+        {
+            return GenerateInfo(e.Message,"Serial Number");
+        }
     }
 
     public async Task<Info<Dictionary<string, long>>> GetRamInfoAsync(string[] keys)
