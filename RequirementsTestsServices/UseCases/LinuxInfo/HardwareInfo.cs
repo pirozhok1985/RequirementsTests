@@ -8,58 +8,28 @@ public class HardwareInfo : IGetHardwareInfo
 {
     private const string CategoryName = "Hardware";
 
-    private async Task<string> ReadToTheEndAsync(string path)
-    {
-        using var sReader = new StreamReader(path);
-        return await sReader.ReadToEndAsync();
-    }
-
-    private Info<Dictionary<TKey,TValue>> GenerateInfo<TKey,TValue>(Dictionary<TKey,TValue> dictionary, string name, string description = "For future needs")
-    {
-        var info = new Info<Dictionary<TKey, TValue>>
-        {
-            Name = name,
-            Category = new InfoCategory{Name = CategoryName},
-            Value = dictionary,
-            Description = description,
-        };
-        return info;
-    }
-
-    private Info<T> GenerateInfo<T>(T value, string name, string description = "For future needs")
-    {
-        var info = new Info<T>
-        {
-            Name = name,
-            Category = new InfoCategory{Name = CategoryName},
-            Value = value,
-            Description = description,
-        };
-        return info;
-    }
-
     public async Task<Info<string>> GetVendorInfoAsync()
     {
-        var value = await ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/board_vendor");
-        return GenerateInfo(value,"Vendor");
+        var value = await LinuxInfoHelpers.ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/board_vendor");
+        return LinuxInfoHelpers.GenerateInfo(value,CategoryName,"Vendor");
     }
 
     public async Task<Info<string>> GetModelInfoAsync()
     {
-        var value = await ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/product_name");
-        return GenerateInfo(value,"Model");
+        var value = await LinuxInfoHelpers.ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/product_name");
+        return LinuxInfoHelpers.GenerateInfo(value,CategoryName,"Model");
     }
 
     public async Task<Info<string>> GetSerialNumberInfoAsync()
     {
         try
         {
-            var value = await ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/product_serial");
-            return GenerateInfo(value,"Serial Number");
+            var value = await LinuxInfoHelpers.ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/product_serial");
+            return LinuxInfoHelpers.GenerateInfo(value,CategoryName,"Serial Number");
         }
         catch (IOException e)
         {
-            return GenerateInfo(e.Message,"Serial Number");
+            return LinuxInfoHelpers.GenerateInfo(e.Message,CategoryName,"Serial Number");
         }
     }
 
@@ -83,7 +53,7 @@ public class HardwareInfo : IGetHardwareInfo
             }
         }
         
-        return GenerateInfo(result,"Ram");
+        return LinuxInfoHelpers.GenerateInfo(result,CategoryName,"Ram");
     }
 
     public async Task<Info<Dictionary<string, string>>> GetCpuInfoAsync(string[] keys)
@@ -105,7 +75,7 @@ public class HardwareInfo : IGetHardwareInfo
             }
         }
         
-        return GenerateInfo(result,"Cpu");
+        return LinuxInfoHelpers.GenerateInfo(result,CategoryName,"Cpu");
     }
 
     public async Task<Info<Dictionary<string, string>>> GetDiskDriveInfoAsync()
@@ -115,11 +85,11 @@ public class HardwareInfo : IGetHardwareInfo
         foreach (var dir in dirs)
         {
             var key = dir.Split("/").Last();
-            var value = await ReadToTheEndAsync($@"{dir}/device/model");
+            var value = await LinuxInfoHelpers.ReadToTheEndAsync($@"{dir}/device/model");
             result.Add(key!,value);
         }
 
-        return GenerateInfo(result,"Disk");
+        return LinuxInfoHelpers.GenerateInfo(result,CategoryName,"Disk");
     }
 
     public async Task<Info<Dictionary<string, string>>> GetFirmWareInfoAsync()
@@ -128,11 +98,11 @@ public class HardwareInfo : IGetHardwareInfo
         string[] keys = {"bios_version", "bios_vendor", "bios_release", "bios_date"};
         foreach (var key in keys)
         {
-            var value = await ReadToTheEndAsync($@"/sys/devices/virtual/dmi/id/{key}");
+            var value = await LinuxInfoHelpers.ReadToTheEndAsync($@"/sys/devices/virtual/dmi/id/{key}");
             result.Add(key,value);
         }
 
-        return GenerateInfo(result,"Bios");
+        return LinuxInfoHelpers.GenerateInfo(result,CategoryName,"Bios");
     }
 
     public Task<Info<Dictionary<string, string>>> GetLocalPrinterInfoAsync()
