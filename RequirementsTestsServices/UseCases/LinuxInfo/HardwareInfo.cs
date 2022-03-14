@@ -1,6 +1,7 @@
 using System.Globalization;
 using RequirementsTestsDomain.Models;
 using RequirementsTestsServices.UseCases.Interfaces;
+using RequirementsTestsServices.UseCases.InventoryInfoTypes;
 
 namespace RequirementsTestsServices.UseCases.LinuxInfo;
 
@@ -33,74 +34,44 @@ public class HardwareInfo : IGetHardwareInfo
         }
     }
 
-    public async Task<Info<Dictionary<string, long>>> GetRamInfoAsync(string[] keys)
+    public async Task<Info<RamInfo>> GetRamInfoAsync()
     {
-        var result = new Dictionary<string, long>();
+        var result = new RamInfo();
         using var sReader = new StreamReader(@"/proc/meminfo");
-        var count = 0;
-        while (!sReader.EndOfStream && count < keys.Length)
+        while (!sReader.EndOfStream)
         {
             var str = await sReader.ReadLineAsync();
-            for (int i = 0; i < keys.Length; i++)
-            {
-                if (str!.Contains(keys[i]))
-                {
-                    long value;
-                    string strValue = str.Split(":")[1].Trim().Split(" ")[0];
-                    result.Add(keys[i], value = long.TryParse(strValue, out var val) ? val : default);
-                    count++;
-                }
-            }
+            var strVal = str?.Split(":")[1].Trim().Split(" ")[0];
+            if (str!.Contains("MemTotal")) result.Total = long.TryParse(strVal, out var val) ? val : default;
+            else if (str!.Contains("MemFree")) result.Free = long.TryParse(strVal, out var val) ? val : default;
         }
-        
         return LinuxInfoHelpers.GenerateInfo(result,CategoryName,"Ram");
     }
 
-    public async Task<Info<Dictionary<string, string>>> GetCpuInfoAsync(string[] keys)
+    public async Task<Info<CpuInfo>> GetCpuInfoAsync()
     {
-        var result = new Dictionary<string, string>();
+        var result = new CpuInfo();
         using var sReader = new StreamReader(@"/proc/cpuinfo");
-        var count = 0;
-        while (!sReader.EndOfStream && count < keys.Length)
+        var str = String.Empty;
+        do
         {
-            var str = await sReader.ReadLineAsync();
-            for (int i = 0; i < keys.Length; i++)
-            {
-                if (str!.Contains(keys[i]))
-                {
-                    string strValue = str.Split(":")[1].Trim();
-                    result.Add(keys[i], strValue);
-                    count++;
-                }
-            }
-        }
+            str = await sReader.ReadLineAsync();
+            if (str!.Contains("model name")) result.Model = str.Split(":")[1].Trim();
+            else if (str!.Contains("cpu cores")) result.CoresCount = int.TryParse(str.Split(":")[1].Trim(), out int val) ? val : default;
+        } while (!sReader.EndOfStream && result.CoresCount == 0);
         
         return LinuxInfoHelpers.GenerateInfo(result,CategoryName,"Cpu");
     }
 
-    public async Task<Info<Dictionary<string, string>>> GetDiskDriveInfoAsync()
+    public async Task<Info<FirmwareInfo>> GetFirmWareInfoAsync()
     {
-        var dirs = Directory.EnumerateDirectories("/sys/block/").Where(d => !d.Contains("loop"));
-        var result = new Dictionary<string, string>();
-        foreach (var dir in dirs)
+        var result = new FirmwareInfo
         {
-            var key = dir.Split("/").Last();
-            var value = await LinuxInfoHelpers.ReadToTheEndAsync($@"{dir}/device/model");
-            result.Add(key!,value);
-        }
-
-        return LinuxInfoHelpers.GenerateInfo(result,CategoryName,"Disk");
-    }
-
-    public async Task<Info<Dictionary<string, string>>> GetFirmWareInfoAsync()
-    {
-        var result = new Dictionary<string, string>();
-        string[] keys = {"bios_version", "bios_vendor", "bios_release", "bios_date"};
-        foreach (var key in keys)
-        {
-            var value = await LinuxInfoHelpers.ReadToTheEndAsync($@"/sys/devices/virtual/dmi/id/{key}");
-            result.Add(key,value);
-        }
+            Date = await LinuxInfoHelpers.ReadToTheEndAsync($@"/sys/devices/virtual/dmi/id/bios_date"),
+            Release = await LinuxInfoHelpers.ReadToTheEndAsync($@"/sys/devices/virtual/dmi/id/bios_release"),
+            Vendor = await LinuxInfoHelpers.ReadToTheEndAsync($@"/sys/devices/virtual/dmi/id/bios_vendor"),
+            Version = await LinuxInfoHelpers.ReadToTheEndAsync($@"/sys/devices/virtual/dmi/id/bios_version")
+        };
 
         return LinuxInfoHelpers.GenerateInfo(result,CategoryName,"Bios");
     }
