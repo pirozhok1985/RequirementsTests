@@ -1,179 +1,46 @@
-using System.Dynamic;
-using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using RequirementsTestsDomain.Models;
 
 namespace RequirementsTestsServices.UseCases.LinuxInfo;
 
-public enum ChainIds
-{
-    BLKID_CHAIN_SUBLKS, /* FS/RAID superblocks (enabled by default) */
-    BLKID_CHAIN_TOPLGY, /* Block device topology */
-    BLKID_CHAIN_PARTS, /* Partition tables */
-    BLKID_NCHAINS /* number of chains */
-}
-
-[StructLayout(LayoutKind.Sequential)]
-public struct list_head
-{
-    public nint next;
-    public nint prev;
-};
-
-[StructLayout(LayoutKind.Sequential)]
-public struct blkid_struct_dev
-{
-    list_head bid_devs; /* All devices in the cache */
-    list_head bid_tags; /* All tags for this device */
-    nint bid_cache; /* Dev belongs to this cache */
-
-    [MarshalAs(UnmanagedType.LPStr, SizeConst = 120)]
-    public string bid_name; /* Device real path (as used in cache) */
-
-    public string bid_xname; /* Device path as used by application (maybe symlink..) */
-
-    [MarshalAs(UnmanagedType.LPStr, SizeConst = 120)]
-    public string bid_type; /* Preferred device TYPE */
-
-    int bid_pri; /* Device priority */
-    int bid_devno; /* Device major/minor number */
-    long bid_time; /* Last update time of device */
-    ulong bid_utime; /* Last update time (microseconds) */
-    uint bid_flags; /* Device status bitflags */
-
-    [MarshalAs(UnmanagedType.LPStr, SizeConst = 120)]
-    public string bid_label; /* Shortcut to device LABEL */
-
-    [MarshalAs(UnmanagedType.LPStr, SizeConst = 120)]
-    public string bid_uuid; /* Shortcut to binary UUID */
-}
-
-[StructLayout(LayoutKind.Sequential)]
-public struct blkid_struct_dev_iterate
-{
-    int magic;
-    nint cache;
-
-    [MarshalAs(UnmanagedType.LPStr, SizeConst = 120)]
-    string search_type;
-
-    [MarshalAs(UnmanagedType.LPStr, SizeConst = 120)]
-    string search_value;
-
-    nint p;
-}
-
-[StructLayout(LayoutKind.Sequential)]
-public struct blkid_struct_cache
-{
-    public list_head bic_devs; /* List head of all devices */
-    list_head bic_tags; /* List head of all tag types */
-    long bic_time; /* Last probe time */
-    long bic_ftime; /* Mod time of the cachefile */
-    uint bic_flags; /* Status flags of the cache */
-    string bic_filename; /* filename of cache */
-    public nint probe; /* low-level probing stuff */
-};
-
-[StructLayout(LayoutKind.Sequential)]
-public struct blkid_chain
-{
-    nint driver; /* chain driver */
-    int enabled; /* boolean */
-    int flags; /* BLKID_<chain>_* */
-    int binary; /* boolean */
-    int idx; /* index of the current prober (or -1) */
-    nint fltr; /* filter or NULL */
-    nint data; /* private chain data or NULL */
-}
-
-// [StructLayout(LayoutKind.Sequential)]
-// public struct blkid_chaindrv
-// {
-//     long id; /* BLKID_CHAIN_* */
-//     [MarshalAs(UnmanagedType.LPStr, SizeConst = 120)] string name; /* name of chain (for debug purpose) */
-//     int dflt_flags; /* default chain flags */
-//     int dflt_enabled; /* default enabled boolean */
-//     int has_fltr; /* boolean */
-//
-//     nint idinfos; /* description of probing functions */
-//     long nidinfos; /* number of idinfos */
-// }
-
-[StructLayout(LayoutKind.Sequential)]
-public struct blkid_struct_probe
-{
-    int fd; /* device file descriptor */
-    ulong off; /* begin of data on the device */
-    ulong size; /* end of data on the device */
-
-    ulong devno; /* device number (st.st_rdev) */
-    ulong disk_devno; /* devno of the whole-disk or 0 */
-    uint blkssz; /* sector size (BLKSSZGET ioctl) */
-    uint mode; /* struct stat.sb_mode */
-    ulong zone_size; /* zone size (BLKGETZONESZ ioctl) */
-
-    int flags; /* private library flags */
-    int prob_flags; /* always zeroized by blkid_do_*() */
-
-    ulong wipe_off; /* begin of the wiped area */
-    ulong wipe_size; /* size of the wiped area */
-    nint wipe_chain; /* superblock, partition, ... */
-
-    list_head buffers; /* list of buffers */
-    list_head hints;
-
-    nint chains; /* array of chains */
-    nint cur_chain; /* current chain */
-
-    list_head values; /* results */
-
-    nint parent; /* for clones */
-    nint disk_probe; /* whole-disk probing */
-}
-
 public static class LinuxInfoHelpers
 {
-    [DllImport("blkid.so")]
-    public static extern int blkid_get_cache(ref nint cache,
-        [MarshalAs(UnmanagedType.LPStr, SizeConst = 120)] string filename);
+    #region extern methods(libblkid)
 
-    [DllImport("blkid.so")]
-    public static extern int blkid_probe_all(nint cache);
-
-    [DllImport("blkid.so")]
-    public static extern nint blkid_dev_iterate_begin(nint cache);
-
-    [DllImport("blkid.so")]
-    public static extern int blkid_dev_next(nint iter, out nint ret_dev);
-
-    [DllImport("blkid.so")]
-    public static extern string blkid_dev_devname(nint dev);
-
-    [DllImport("blkid.so")]
-    public static extern int blkid_do_probe(nint pr);
-
-    [DllImport("blkid.so")]
-    public static extern int blkid_probe_lookup_value(
-        nint pr,[MarshalAs(UnmanagedType.LPStr, SizeConst = 120)] string name,[MarshalAs(UnmanagedType.LPStr, SizeConst = 120)] out string data, nint len);
+    [DllImport("blkid.so",EntryPoint = "blkid_do_fullprobe")]
+    public static extern int DoFullProbe(nint pr); // Try to probe specific device(dev or part) in order to fetch information from it 
     
-    [DllImport("blkid.so")]
-    public static extern nint blkid_new_probe_from_filename(
-        [MarshalAs(UnmanagedType.LPStr, SizeConst = 120)] string filename);
+    [DllImport("blkid.so", EntryPoint = "blkid_partlist_numof_partitions")]
+    public static extern int GetNumberOfPartitions(nint ls);
 
-    public static Info<Dictionary<TKey, TValue>> GenerateInfo<TKey, TValue>(Dictionary<TKey, TValue> dictionary,
-        string categoryName, string name, string description = "For future needs")
-    {
-        var info = new Info<Dictionary<TKey, TValue>>
-        {
-            Name = name,
-            Category = new InfoCategory {Name = categoryName},
-            Value = dictionary,
-            Description = description,
-        };
-        return info;
-    }
+    [DllImport("blkid.so", EntryPoint = "blkid_probe_lookup_value")]
+    public static extern int LookupValue(
+        nint pr, [MarshalAs(UnmanagedType.LPStr)] string name,
+        [MarshalAs(UnmanagedType.LPStr)] out string data, nint len); // Lookup value according to the 'name' parameter and [out] result to 'data'
 
+    [DllImport("blkid.so", EntryPoint = "blkid_new_probe_from_filename")]
+    public static extern nint NewProbeFromFilename(
+        [MarshalAs(UnmanagedType.LPStr)]
+        string filename);
+
+    [DllImport("blkid.so", EntryPoint = "blkid_probe_get_partitions")]
+    public static extern nint
+        GetPartitions(nint pr); //Get pointer to partition list, pointer to dev probe as a parameter
+
+    [DllImport("blkid.so",EntryPoint = "blkid_partlist_get_partition")]
+    public static extern nint
+        GetPartition(nint ls, int num); //Get pointer to partition, pointer to partition list as a parameter
+
+    [DllImport("blkid.so", EntryPoint = "blkid_partition_get_uuid")]
+    public static extern unsafe char *
+        GetUuid(nint par); //Get partition uuid as char*, Pointer to the particular partition as a parameter;
+
+    [DllImport("blkid.so", EntryPoint = "blkid_partition_get_name")]
+    public static extern unsafe char *
+        GetName(nint par); //Get partition name as char*, Pointer to the particular partition as a parameter;
+
+    #endregion
+    
     public static Info<T> GenerateInfo<T>(T value, string categoryName, string name,
         string description = "For future needs")
     {
