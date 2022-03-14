@@ -9,12 +9,13 @@ namespace RequirementsTestsServices.UseCases.LinuxInfo;
 public class OperatingSystemInfo : IGetOsInfo
 {
     private const string CategoryName = "Operating system";
-    public async Task<Info<OsInfo>> GetOsInfo()
+
+    public async Task<Info<OsInfo>> GetOsInfoAsync()
     {
         var osInfo = new OsInfo();
         var result = await LinuxInfoHelpers.ReadToTheEndAsync("/etc/lsb-release");
         var query = result.Split("\n").Where(e => e != String.Empty)
-            .ToDictionary(k => k.Split("=")[0],v => v.Split("=")[1]);
+            .ToDictionary(k => k.Split("=")[0], v => v.Split("=")[1]);
         foreach (var kv in query)
         {
             switch (kv.Key)
@@ -33,10 +34,11 @@ public class OperatingSystemInfo : IGetOsInfo
                     break;
             }
         }
+
         return LinuxInfoHelpers.GenerateInfo(osInfo, CategoryName, "Os Info");
     }
 
-    public async Task<Info<IList<NetworkConfigInfo>>> GetNetworkConfigInfo()
+    public async Task<Info<IList<NetworkConfigInfo>>> GetNetworkConfigInfoAsync()
     {
         IList<NetworkConfigInfo> result = new List<NetworkConfigInfo>();
         var netConfig = new NetworkConfigInfo();
@@ -47,52 +49,54 @@ public class OperatingSystemInfo : IGetOsInfo
                 .Where(i => !i.Name.Contains("docker"));
             foreach (var nic in nics)
             {
-                netConfig.IpAddresses = nic.GetIPProperties().UnicastAddresses.Select(a => a.Address.ToString()).ToArray();
-                netConfig.Gateway = nic.GetIPProperties().GatewayAddresses.Select(g => g.Address.ToString()).FirstOrDefault()!;
+                netConfig.IpAddresses =
+                    nic.GetIPProperties().UnicastAddresses.Select(a => a.Address.ToString()).ToArray();
+                netConfig.Gateway = nic.GetIPProperties().GatewayAddresses.Select(g => g.Address.ToString())
+                    .FirstOrDefault()!;
                 netConfig.DnsServers = nic.GetIPProperties().DnsAddresses.Select(d => d.ToString()).ToArray();
                 netConfig.InterfaceName = nic.Name;
                 result.Add(netConfig);
             }
         });
-        return LinuxInfoHelpers.GenerateInfo(result,CategoryName,"Network Config");
+        return LinuxInfoHelpers.GenerateInfo(result, CategoryName, "Network Config");
     }
-    
-    public async Task<Info<IList<DiskDrivePartitionInfo>>> GetDiskDrivePartitionInfo()
+
+    public async Task<Info<IList<DiskDrivePartitionInfo>>> GetDiskDrivePartitionInfoAsync()
     {
         IList<DiskDrivePartitionInfo> result = new List<DiskDrivePartitionInfo>();
-        await Task.Run(() =>
+        var partInfo = new DiskDrivePartitionInfo();
+        var devNameDir = Directory.EnumerateDirectories("/sys/block/").Where(d => !d.Contains("loop"));
+        foreach (var devDir in devNameDir)
         {
-            var partInfo = new DiskDrivePartitionInfo();
-            var devNameDir = Directory.EnumerateDirectories("/sys/block/").Where(d => !d.Contains("loop"));
-            foreach (var devDir in devNameDir)
+            partInfo.DiskDriveModel = await LinuxInfoHelpers.ReadToTheEndAsync($@"{devDir}/device/model");
+            var devName = @$"/dev/{devDir.Split("/").Last()}";
+            var partProbeRef = LinuxInfoHelpers.NewProbeFromFilename(devName);
+            var pList = LinuxInfoHelpers.GetPartitions(partProbeRef);
+            var partNum = LinuxInfoHelpers.GetNumberOfPartitions(pList);
+            for (int i = 0; i < partNum; i++)
             {
-                var devName = @$"/dev/{devDir.Split("/").Last()}";
-                var partProbeRef = LinuxInfoHelpers.NewProbeFromFilename(devName);
-                var pList = LinuxInfoHelpers.GetPartitions(partProbeRef);
-                var partNum = LinuxInfoHelpers.GetNumberOfPartitions(pList);
-                for (int i = 0; i < partNum; i++)
+                var pPart = LinuxInfoHelpers.GetPartition(pList, i);
+                unsafe
                 {
-                    var pPart = LinuxInfoHelpers.GetPartition(pList, i);
-                    unsafe
-                    {
-                        partInfo.PartUuid = Marshal.PtrToStringAnsi((IntPtr) LinuxInfoHelpers.GetUuid(pPart))!;
-                        partInfo.PartLabel = Marshal.PtrToStringAnsi((IntPtr) LinuxInfoHelpers.GetName(pPart))!;
-                    }
-
-                    var partName = devName.Contains("nvme") ? $"{devName}p{i + 1}" : $"{devName}{i + 1}";
-                    var devProbeRef = LinuxInfoHelpers.NewProbeFromFilename(@$"/dev/{partName.Split("/").Last()}");
-                    LinuxInfoHelpers.DoFullProbe(devProbeRef);
-                    var retCode1 = LinuxInfoHelpers.LookupValue(devProbeRef, "LABEL", out string label, IntPtr.Zero);
-                    var retCode2 = LinuxInfoHelpers.LookupValue(devProbeRef, "UUID", out string uuid, IntPtr.Zero);
-                    var retCode5 = LinuxInfoHelpers.LookupValue(devProbeRef, "TYPE", out string type, IntPtr.Zero);
-                    partInfo.Label = label;
-                    partInfo.Type = type;
-                    partInfo.Name = partName;
-                    partInfo.Uuid = uuid;
+                    partInfo.PartUuid = Marshal.PtrToStringAnsi((IntPtr) LinuxInfoHelpers.GetUuid(pPart))!;
+                    partInfo.PartLabel = Marshal.PtrToStringAnsi((IntPtr) LinuxInfoHelpers.GetName(pPart))!;
                 }
-                result.Add(partInfo);
+
+                var partName = devName.Contains("nvme") ? $"{devName}p{i + 1}" : $"{devName}{i + 1}";
+                var devProbeRef = LinuxInfoHelpers.NewProbeFromFilename(@$"/dev/{partName.Split("/").Last()}");
+                LinuxInfoHelpers.DoFullProbe(devProbeRef);
+                var retCode1 = LinuxInfoHelpers.LookupValue(devProbeRef, "LABEL", out string label, IntPtr.Zero);
+                var retCode2 = LinuxInfoHelpers.LookupValue(devProbeRef, "UUID", out string uuid, IntPtr.Zero);
+                var retCode5 = LinuxInfoHelpers.LookupValue(devProbeRef, "TYPE", out string type, IntPtr.Zero);
+                partInfo.Label = label;
+                partInfo.Type = type;
+                partInfo.PartName = partName;
+                partInfo.Uuid = uuid;
             }
-        });
-        return LinuxInfoHelpers.GenerateInfo(result,CategoryName,"Partition configuration");;
+
+            result.Add(partInfo);
+        }
+
+        return LinuxInfoHelpers.GenerateInfo(result, CategoryName, "Partition configuration");
     }
 }
