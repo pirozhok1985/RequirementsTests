@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RequirementsTestsDomain.Models;
+using RequirementsTestsServices.UseCases.InventoryInfoTypes;
 using RequirementsTestsServices.UseCases.LinuxInfo;
 using Assert = Xunit.Assert;
 
@@ -45,40 +46,38 @@ public class HardwareInfoTests
     [TestMethod]
     public async Task CheckIfGetRamInfoReturnsCorrectValue()
     {
-        var resultRam = await new HardwareInfo().GetRamInfoAsync(new[] {"MemTotal","MemFree","Mapped"});
+        var resultRam = await new HardwareInfo().GetRamInfoAsync();
 
-        Assert.IsType<Info<Dictionary<string,long>>>(resultRam);
-        Assert.NotEmpty(resultRam.Value!);
+        Assert.IsType<Info<RamInfo>>(resultRam);
+        Assert.NotNull(resultRam.Value);
+        Assert.NotEqual(0, resultRam.Value?.Free);
+        Assert.NotEqual(0, resultRam.Value?.Total);
         Assert.Equal(ExpectedCategory,resultRam.Category!.Name);
     }  
     
     [TestMethod]
     public async Task CheckIfGetCpuInfoReturnsCorrectValue()
     {
-        var resultCpu = await new HardwareInfo().GetCpuInfoAsync(new[] {"model name", "cpu cores"});
+        var resultCpu = await new HardwareInfo().GetCpuInfoAsync();
 
-        Assert.IsType<Info<Dictionary<string,string>>>(resultCpu);
-        Assert.NotEmpty(resultCpu.Value!);
+        Assert.IsType<Info<CpuInfo>>(resultCpu);
+        Assert.NotNull(resultCpu.Value);
+        Assert.NotNull(resultCpu.Value?.Model);
+        Assert.NotEqual(0,resultCpu.Value?.CoresCount);
         Assert.Equal(ExpectedCategory,resultCpu.Category!.Name);
-    }    
-    
-    [TestMethod]
-    public async Task CheckIfGetDiskDriveInfoReturnsCorrectValue()
-    {
-        var resultDiskDrive = await new HardwareInfo().GetDiskDriveInfoAsync();
+    }
 
-        Assert.IsType<Info<Dictionary<string,string>>>(resultDiskDrive);
-        Assert.NotEmpty(resultDiskDrive.Value!);
-        Assert.Equal(ExpectedCategory,resultDiskDrive.Category!.Name);
-    }   
-    
     [TestMethod]
     public async Task CheckIfGetFirmwareInfoReturnsCorrectValue()
     {
         var resultFirmWare = await new HardwareInfo().GetFirmWareInfoAsync();
 
-        Assert.IsType<Info<Dictionary<string,string>>>(resultFirmWare);
-        Assert.NotEmpty(resultFirmWare.Value!);
+        Assert.IsType<Info<FirmwareInfo>>(resultFirmWare);
+        Assert.NotNull(resultFirmWare.Value);
+        Assert.NotNull(resultFirmWare.Value?.Date);
+        Assert.NotNull(resultFirmWare.Value?.Release);
+        Assert.NotNull(resultFirmWare.Value?.Vendor);
+        Assert.NotNull(resultFirmWare.Value?.Version);
         Assert.Equal(ExpectedCategory,resultFirmWare.Category!.Name);
     }
     
