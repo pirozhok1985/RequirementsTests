@@ -1,5 +1,5 @@
 using RequirementsTestsDomain.Models;
-using RequirementsTestsServices.UseCases.InventoryInfoTypes;
+using RequirementsTestsDomain.Models.InventoryInfoTypes;
 
 namespace RequirementsTestsServices.UseCases.Interfaces;
 

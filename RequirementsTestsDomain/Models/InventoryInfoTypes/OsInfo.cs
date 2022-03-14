@@ -1,4 +1,4 @@
-namespace RequirementsTestsServices.UseCases.InventoryInfoTypes;
+namespace RequirementsTestsDomain.Models.InventoryInfoTypes;
 
 public class OsInfo
 {

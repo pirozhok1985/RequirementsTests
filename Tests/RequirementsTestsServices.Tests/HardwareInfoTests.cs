@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RequirementsTestsDomain.Models;
-using RequirementsTestsServices.UseCases.InventoryInfoTypes;
+using RequirementsTestsDomain.Models.InventoryInfoTypes;
 using RequirementsTestsServices.UseCases.LinuxInfo;
 using Assert = Xunit.Assert;
 

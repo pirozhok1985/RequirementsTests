@@ -1,8 +1,8 @@
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using RequirementsTestsDomain.Models;
+using RequirementsTestsDomain.Models.InventoryInfoTypes;
 using RequirementsTestsServices.UseCases.Interfaces;
-using RequirementsTestsServices.UseCases.InventoryInfoTypes;
 
 namespace RequirementsTestsServices.UseCases.LinuxInfo;
 
