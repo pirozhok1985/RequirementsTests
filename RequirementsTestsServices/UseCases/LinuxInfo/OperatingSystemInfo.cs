@@ -30,10 +30,10 @@ public class OperatingSystemInfo : IGetOsInfo
                     osInfo.Id = kv.Value;
                     break;
                 case "DISTRIB_RELEASE":
-                    osInfo.Id = kv.Value;
+                    osInfo.Release = kv.Value;
                     break;
                 case "DISTRIB_DESCRIPTION":
-                    osInfo.Id = kv.Value;
+                    osInfo.Description = kv.Value;
                     break;
             }
         }
@@ -44,7 +44,6 @@ public class OperatingSystemInfo : IGetOsInfo
     public async Task<Info<IList<NetworkConfigInfo>>> GetNetworkConfigInfoAsync()
     {
         IList<NetworkConfigInfo> result = new List<NetworkConfigInfo>();
-        var netConfig = new NetworkConfigInfo();
         await Task.Run(() =>
         {
             var nics = NetworkInterface.GetAllNetworkInterfaces()
@@ -52,13 +51,13 @@ public class OperatingSystemInfo : IGetOsInfo
                 .Where(i => !i.Name.Contains("docker"));
             foreach (var nic in nics)
             {
-                netConfig.IpAddresses =
-                    nic.GetIPProperties().UnicastAddresses.Select(a => a.Address.ToString()).ToArray();
-                netConfig.Gateway = nic.GetIPProperties().GatewayAddresses.Select(g => g.Address.ToString())
-                    .FirstOrDefault()!;
-                netConfig.DnsServers = nic.GetIPProperties().DnsAddresses.Select(d => d.ToString()).ToArray();
-                netConfig.InterfaceName = nic.Name;
-                result.Add(netConfig);
+                result.Add( new NetworkConfigInfo()
+                {
+                    IpAddresses = nic.GetIPProperties().UnicastAddresses.Select(a => a.Address.ToString()).ToArray(),
+                    Gateway = nic.GetIPProperties().GatewayAddresses.Select(g => g.Address.ToString()).FirstOrDefault()!,
+                    DnsServers = nic.GetIPProperties().DnsAddresses.Select(d => d.ToString()).ToArray(),
+                    InterfaceName = nic.Name
+                });
             }
         });
         return LinuxInfoHelpers.GenerateInfo(result, CategoryName, "Network Config");
@@ -70,13 +69,13 @@ public class OperatingSystemInfo : IGetOsInfo
         var devDirName = Directory.EnumerateDirectories("/sys/block/").Where(d => !d.Contains("loop"));
         foreach (var devDir in devDirName)
         {
-             diskDrivePartitionInfoList.Add(await CreateDiskDrivePartitionInfo(devDir));
+             diskDrivePartitionInfoList.Add(await CreateDiskDrivePartitionInfoAsync(devDir));
         }
 
         return LinuxInfoHelpers.GenerateInfo(diskDrivePartitionInfoList, CategoryName, "Partition configuration");
     }
 
-    private async Task<DiskDrivePartitionInfo> CreateDiskDrivePartitionInfo(string devDir)
+    private async Task<DiskDrivePartitionInfo> CreateDiskDrivePartitionInfoAsync(string devDir)
     {
         var partInfo = new DiskDrivePartitionInfo();
         partInfo.DiskDriveModel = await LinuxInfoHelpers.ReadToTheEndAsync($@"{devDir}/device/model");
@@ -119,7 +118,7 @@ public class OperatingSystemInfo : IGetOsInfo
         return value;
     }
 
-    public async Task<Info<IList<CertificateInfo>>> GetCertificateInfo()
+    public async Task<Info<IList<CertificateInfo>>> GetCertificateInfoAsync()
     {
         IList<CertificateInfo> certificateInfoList = new List<CertificateInfo>();
         await Task.Run(() =>
