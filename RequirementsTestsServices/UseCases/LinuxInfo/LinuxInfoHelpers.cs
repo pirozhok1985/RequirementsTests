@@ -33,11 +33,11 @@ public static class LinuxInfoHelpers
 
     [DllImport("blkid.so", EntryPoint = "blkid_partition_get_uuid")]
     public static extern unsafe char *
-        GetUuid(nint par); //Get partition uuid as char*, Pointer to the particular partition as a parameter;
+        GetPartUuid(nint par); //Get partition uuid as char*, Pointer to the particular partition as a parameter;
 
     [DllImport("blkid.so", EntryPoint = "blkid_partition_get_name")]
     public static extern unsafe char *
-        GetName(nint par); //Get partition name as char*, Pointer to the particular partition as a parameter;
+        GetPartLabel(nint par); //Get partition name as char*, Pointer to the particular partition as a parameter;
 
     #endregion
     
