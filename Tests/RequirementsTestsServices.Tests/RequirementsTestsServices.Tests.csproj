@@ -24,6 +24,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\BusinessLogic\RequirementsTestsDomain\RequirementsTestsDomain.csproj" />
+      <ProjectReference Include="..\..\BusinessLogic\RequirementsTestsServices\RequirementsTestsServices.csproj" />
       <ProjectReference Include="..\..\RequirementsTestsServices\RequirementsTestsServices.csproj" />
     </ItemGroup>
 
