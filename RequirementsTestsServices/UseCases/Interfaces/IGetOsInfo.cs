@@ -8,7 +8,7 @@ public interface IGetOsInfo
     public Task<Info<OsInfo>> GetOsInfoAsync();
     public Task<Info<IList<NetworkConfigInfo>>> GetNetworkConfigInfoAsync();
     public Task<Info<IList<DiskDrivePartitionInfo>>> GetDiskDrivePartitionInfoAsync();
+    public Task<Info<IList<CertificateInfo>>> GetCertificateInfo();
     // public Info<T> GetDiskDriveEncryptionInfo();
     // public Info<T> GetAdDomainInfo();
-    // public Info<T> GetRootCertInfo();
 }
