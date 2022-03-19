@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequirementsTestsConsole", "Console\RequirementsTestsConsole\RequirementsTestsConsole.csproj", "{ACBFE73B-4AFA-42C7-9571-19E987AA7C69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequirementsTests.Domain", "BusinessLogic\RequirementsTests.Domain\RequirementsTests.Domain.csproj", "{3F2167A1-364E-4F93-8346-BAF78D4753A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequirementsTestsDomain", "BusinessLogic\RequirementsTestsDomain\RequirementsTestsDomain.csproj", "{3F2167A1-364E-4F93-8346-BAF78D4753A5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequirementsTestsServices", "BusinessLogic\RequirementsTestsServices\RequirementsTestsServices.csproj", "{B5F5FC35-17C5-43B5-A872-8830E0EFF621}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequirementsTests.Services", "BusinessLogic\RequirementsTests.Services\RequirementsTests.Services.csproj", "{B5F5FC35-17C5-43B5-A872-8830E0EFF621}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AC3AB58E-6B24-465E-9273-283D80219BD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequirementsTestsServices.Tests", "Tests\RequirementsTestsServices.Tests\RequirementsTestsServices.Tests.csproj", "{05C395D4-65DB-4911-BD22-A2A67B1EC570}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequirementsTests.Services.Tests", "Tests\RequirementsTests.Services.Tests\RequirementsTests.Services.Tests.csproj", "{05C395D4-65DB-4911-BD22-A2A67B1EC570}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{E37C265C-5995-48B0-8B58-F04DD577FDAD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogic", "BusinessLogic", "{CD271AF7-4B06-4FC1-829E-3D1CCE026C65}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{7B18C467-867D-4E7B-B9C0-B610444B5EF8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{A0D964E3-C827-41ED-B7CC-BEBBE691F86F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequirementsTests.Console", "Console\RequirementsTests.Console\RequirementsTests.Console.csproj", "{C8192368-4E26-406B-B661-AE5D91A5EDB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,10 +28,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ACBFE73B-4AFA-42C7-9571-19E987AA7C69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ACBFE73B-4AFA-42C7-9571-19E987AA7C69}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ACBFE73B-4AFA-42C7-9571-19E987AA7C69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ACBFE73B-4AFA-42C7-9571-19E987AA7C69}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3F2167A1-364E-4F93-8346-BAF78D4753A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3F2167A1-364E-4F93-8346-BAF78D4753A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F2167A1-364E-4F93-8346-BAF78D4753A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -44,11 +40,15 @@ Global
 		{05C395D4-65DB-4911-BD22-A2A67B1EC570}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05C395D4-65DB-4911-BD22-A2A67B1EC570}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05C395D4-65DB-4911-BD22-A2A67B1EC570}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8192368-4E26-406B-B661-AE5D91A5EDB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8192368-4E26-406B-B661-AE5D91A5EDB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8192368-4E26-406B-B661-AE5D91A5EDB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8192368-4E26-406B-B661-AE5D91A5EDB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{05C395D4-65DB-4911-BD22-A2A67B1EC570} = {AC3AB58E-6B24-465E-9273-283D80219BD0}
 		{3F2167A1-364E-4F93-8346-BAF78D4753A5} = {CD271AF7-4B06-4FC1-829E-3D1CCE026C65}
 		{B5F5FC35-17C5-43B5-A872-8830E0EFF621} = {CD271AF7-4B06-4FC1-829E-3D1CCE026C65}
-		{ACBFE73B-4AFA-42C7-9571-19E987AA7C69} = {7B18C467-867D-4E7B-B9C0-B610444B5EF8}
+		{C8192368-4E26-406B-B661-AE5D91A5EDB7} = {A0D964E3-C827-41ED-B7CC-BEBBE691F86F}
 	EndGlobalSection
 EndGlobal
