@@ -1,0 +1,88 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "RequirementsTests.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/RequirementsTests.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RequirementsTests.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "RequirementsTests.Domain/1.0.0": {
+      "type": "project",
+      "path": "../RequirementsTests.Domain/RequirementsTests.Domain.csproj",
+      "msbuildProject": "../RequirementsTests.Domain/RequirementsTests.Domain.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "RequirementsTests.Domain >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/home/anisimov/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/home/anisimov/RiderProjects/RequirementsTests/BusinessLogic/RequirementsTests.Services/RequirementsTests.Services.csproj",
+      "projectName": "RequirementsTests.Services",
+      "projectPath": "/home/anisimov/RiderProjects/RequirementsTests/BusinessLogic/RequirementsTests.Services/RequirementsTests.Services.csproj",
+      "packagesPath": "/home/anisimov/.nuget/packages/",
+      "outputPath": "/home/anisimov/RiderProjects/RequirementsTests/BusinessLogic/RequirementsTests.Services/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/home/anisimov/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {
+            "/home/anisimov/RiderProjects/RequirementsTests/BusinessLogic/RequirementsTests.Domain/RequirementsTests.Domain.csproj": {
+              "projectPath": "/home/anisimov/RiderProjects/RequirementsTests/BusinessLogic/RequirementsTests.Domain/RequirementsTests.Domain.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/.dotnet6/sdk/6.0.200/RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
