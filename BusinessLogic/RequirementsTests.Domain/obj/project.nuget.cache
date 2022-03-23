@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "TrPtwCegL9cNwSE0Ge3YsygIXjo8g2oo4aaK22UBavaqsS84rG7LRbx/HVNi7RQBc6iDdBDO6n+INPZ3cCxpTg==",
+  "dgSpecHash": "ZlZJ0Cyk3wD/JHVLd2FCbIfEili8RX9u9Myx4XWQ8goCPdYsqFRXFCC69Xx/dt8jFyBvq20cEEPx5eAk236OHw==",
   "success": true,
-  "projectFilePath": "/home/anisimov/RiderProjects/RequirementsTests/BusinessLogic/RequirementsTests.Domain/RequirementsTests.Domain.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Domain/RequirementsTests.Domain.csproj",
+  "expectedPackageFiles": [
+    "/home/anisimov/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.2/microsoft.aspnetcore.app.ref.6.0.2.nupkg.sha512"
+  ],
   "logs": []
 }

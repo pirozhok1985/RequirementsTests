@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/anisimov/RiderProjects/RequirementsTests/Console/RequirementsTests.Console/RequirementsTests.Console.csproj": {}
+    "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/Console/RequirementsTests.Console/RequirementsTests.Console.csproj": {}
   },
   "projects": {
-    "/home/anisimov/RiderProjects/RequirementsTests/Console/RequirementsTests.Console/RequirementsTests.Console.csproj": {
+    "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/Console/RequirementsTests.Console/RequirementsTests.Console.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/anisimov/RiderProjects/RequirementsTests/Console/RequirementsTests.Console/RequirementsTests.Console.csproj",
+        "projectUniqueName": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/Console/RequirementsTests.Console/RequirementsTests.Console.csproj",
         "projectName": "RequirementsTests.Console",
-        "projectPath": "/home/anisimov/RiderProjects/RequirementsTests/Console/RequirementsTests.Console/RequirementsTests.Console.csproj",
+        "projectPath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/Console/RequirementsTests.Console/RequirementsTests.Console.csproj",
         "packagesPath": "/home/anisimov/.nuget/packages/",
-        "outputPath": "/home/anisimov/RiderProjects/RequirementsTests/Console/RequirementsTests.Console/obj/",
+        "outputPath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/Console/RequirementsTests.Console/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/anisimov/.nuget/NuGet/NuGet.Config"
@@ -47,12 +47,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.2, 6.0.2]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/.dotnet6/sdk/6.0.200/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.102/RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "6799Ii0qEPJoyx4r+iOePERiStB4lj57Y/oE8UPUnTuEP3E2z3ta1683C80ZopbDJWta7EXC3l4qpw7XPiAoeg==",
+  "dgSpecHash": "iTYTVLVVnPFsikZUHYwUnO6g6VIIc5pbnhLF/vQCxVSAfXAKjQ8RkioQHFSZqwCRdjf7uRSFdXBQzGduknHg+w==",
   "success": true,
-  "projectFilePath": "/home/anisimov/RiderProjects/RequirementsTests/Console/RequirementsTests.Console/RequirementsTests.Console.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/Console/RequirementsTests.Console/RequirementsTests.Console.csproj",
+  "expectedPackageFiles": [
+    "/home/anisimov/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.2/microsoft.aspnetcore.app.ref.6.0.2.nupkg.sha512"
+  ],
   "logs": []
 }

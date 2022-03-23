@@ -6945,11 +6945,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/anisimov/RiderProjects/RequirementsTests/Tests/RequirementsTests.Services.Tests/RequirementsTests.Services.Tests.csproj",
+      "projectUniqueName": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/Tests/RequirementsTests.Services.Tests/RequirementsTests.Services.Tests.csproj",
       "projectName": "RequirementsTests.Services.Tests",
-      "projectPath": "/home/anisimov/RiderProjects/RequirementsTests/Tests/RequirementsTests.Services.Tests/RequirementsTests.Services.Tests.csproj",
+      "projectPath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/Tests/RequirementsTests.Services.Tests/RequirementsTests.Services.Tests.csproj",
       "packagesPath": "/home/anisimov/.nuget/packages/",
-      "outputPath": "/home/anisimov/RiderProjects/RequirementsTests/Tests/RequirementsTests.Services.Tests/obj/",
+      "outputPath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/Tests/RequirementsTests.Services.Tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/anisimov/.nuget/NuGet/NuGet.Config"
@@ -6964,11 +6964,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/home/anisimov/RiderProjects/RequirementsTests/BusinessLogic/RequirementsTests.Domain/RequirementsTests.Domain.csproj": {
-              "projectPath": "/home/anisimov/RiderProjects/RequirementsTests/BusinessLogic/RequirementsTests.Domain/RequirementsTests.Domain.csproj"
+            "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Domain/RequirementsTests.Domain.csproj": {
+              "projectPath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Domain/RequirementsTests.Domain.csproj"
             },
-            "/home/anisimov/RiderProjects/RequirementsTests/BusinessLogic/RequirementsTests.Services/RequirementsTests.Services.csproj": {
-              "projectPath": "/home/anisimov/RiderProjects/RequirementsTests/BusinessLogic/RequirementsTests.Services/RequirementsTests.Services.csproj"
+            "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/RequirementsTests.Services.csproj": {
+              "projectPath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/RequirementsTests.Services.csproj"
             }
           }
         }
@@ -7026,12 +7026,18 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.2, 6.0.2]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/.dotnet6/sdk/6.0.200/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.102/RuntimeIdentifierGraph.json"
       }
     }
   }
