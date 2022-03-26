@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LLjT3xJtlt5P6sfpg/Ea+vow7iIb8nieVDYimTdkTi0q0UqPy08QGkobd/F5AlVWd2/42nEnfQBPMpGmg3JgiQ==",
+  "dgSpecHash": "EoSS20d/WJ26uWamC2RGM+4yPsyx642+4BkwuUxw1DKCU5GPg9LTdb48MjxxVep1MlWqfERKm5o4Tl58vWmleg==",
   "success": true,
   "projectFilePath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/RequirementsTests.Services.csproj",
-  "expectedPackageFiles": [
-    "/home/anisimov/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.2/microsoft.aspnetcore.app.ref.6.0.2.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

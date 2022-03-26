@@ -11,13 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AC3AB58E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequirementsTests.Services.Tests", "Tests\RequirementsTests.Services.Tests\RequirementsTests.Services.Tests.csproj", "{05C395D4-65DB-4911-BD22-A2A67B1EC570}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{E37C265C-5995-48B0-8B58-F04DD577FDAD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogic", "BusinessLogic", "{CD271AF7-4B06-4FC1-829E-3D1CCE026C65}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{A0D964E3-C827-41ED-B7CC-BEBBE691F86F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{A0D964E3-C827-41ED-B7CC-BEBBE691F86F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequirementsTests.Console", "Console\RequirementsTests.Console\RequirementsTests.Console.csproj", "{C8192368-4E26-406B-B661-AE5D91A5EDB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequirementsTests.Console", "UI\RequirementsTests.Console\RequirementsTests.Console.csproj", "{C8192368-4E26-406B-B661-AE5D91A5EDB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

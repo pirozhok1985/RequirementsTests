@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2YWeXYu/HZHJo/jiFKl5Tlfu6R9FVNOuCSWPhyTfi3amwbPYHvXkSFq1n2hhzzmxhbWp7OWmdREDBis7WG7HaA==",
+  "dgSpecHash": "6s2isIdoTiGYAgagubTMe2wqvJHw+9vv3F6FWYY8/6XnceOSovpvJ/u4kUGDB6NUhM6RTMh1dd88Wmymx7G6kQ==",
   "success": true,
   "projectFilePath": "/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/Tests/RequirementsTests.Services.Tests/RequirementsTests.Services.Tests.csproj",
   "expectedPackageFiles": [
@@ -107,8 +107,7 @@
     "/home/anisimov/.nuget/packages/xunit.core/2.4.1/xunit.core.2.4.1.nupkg.sha512",
     "/home/anisimov/.nuget/packages/xunit.extensibility.core/2.4.1/xunit.extensibility.core.2.4.1.nupkg.sha512",
     "/home/anisimov/.nuget/packages/xunit.extensibility.execution/2.4.1/xunit.extensibility.execution.2.4.1.nupkg.sha512",
-    "/home/anisimov/.nuget/packages/xunit.runner.visualstudio/2.4.3/xunit.runner.visualstudio.2.4.3.nupkg.sha512",
-    "/home/anisimov/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.2/microsoft.aspnetcore.app.ref.6.0.2.nupkg.sha512"
+    "/home/anisimov/.nuget/packages/xunit.runner.visualstudio/2.4.3/xunit.runner.visualstudio.2.4.3.nupkg.sha512"
   ],
   "logs": []
 }
