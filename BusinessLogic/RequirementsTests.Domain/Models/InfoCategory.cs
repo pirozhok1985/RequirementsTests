@@ -1,3 +1,4 @@
+using System;
 using RequirementsTests.Domain.Base;
 
 namespace RequirementsTests.Domain.Models;

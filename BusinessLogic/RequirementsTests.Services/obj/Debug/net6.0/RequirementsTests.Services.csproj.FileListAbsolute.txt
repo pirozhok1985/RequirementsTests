@@ -1,0 +1,15 @@
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/bin/Debug/net6.0/RequirementsTests.Services.deps.json
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/bin/Debug/net6.0/RequirementsTests.Services.dll
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/bin/Debug/net6.0/RequirementsTests.Services.pdb
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/bin/Debug/net6.0/RequirementsTests.Domain.dll
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/bin/Debug/net6.0/RequirementsTests.Domain.pdb
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/obj/Debug/net6.0/RequirementsTests.Services.csproj.AssemblyReference.cache
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/obj/Debug/net6.0/RequirementsTests.Services.GeneratedMSBuildEditorConfig.editorconfig
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/obj/Debug/net6.0/RequirementsTests.Services.AssemblyInfoInputs.cache
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/obj/Debug/net6.0/RequirementsTests.Services.AssemblyInfo.cs
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/obj/Debug/net6.0/RequirementsTests.Services.csproj.CoreCompileInputs.cache
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/obj/Debug/net6.0/RequirementsTests.Services.csproj.CopyComplete
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/obj/Debug/net6.0/RequirementsTests.Services.dll
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/obj/Debug/net6.0/refint/RequirementsTests.Services.dll
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/obj/Debug/net6.0/RequirementsTests.Services.pdb
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/BusinessLogic/RequirementsTests.Services/obj/Debug/net6.0/ref/RequirementsTests.Services.dll

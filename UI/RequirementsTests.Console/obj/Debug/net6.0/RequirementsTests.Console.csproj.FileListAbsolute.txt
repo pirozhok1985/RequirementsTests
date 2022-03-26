@@ -1,0 +1,15 @@
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/UI/RequirementsTests.Console/bin/Debug/net6.0/RequirementsTests.Console
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/UI/RequirementsTests.Console/bin/Debug/net6.0/RequirementsTests.Console.deps.json
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/UI/RequirementsTests.Console/bin/Debug/net6.0/RequirementsTests.Console.runtimeconfig.json
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/UI/RequirementsTests.Console/bin/Debug/net6.0/RequirementsTests.Console.dll
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/UI/RequirementsTests.Console/bin/Debug/net6.0/RequirementsTests.Console.pdb
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/UI/RequirementsTests.Console/obj/Debug/net6.0/RequirementsTests.Console.csproj.AssemblyReference.cache
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/UI/RequirementsTests.Console/obj/Debug/net6.0/RequirementsTests.Console.GeneratedMSBuildEditorConfig.editorconfig
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/UI/RequirementsTests.Console/obj/Debug/net6.0/RequirementsTests.Console.AssemblyInfoInputs.cache
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/UI/RequirementsTests.Console/obj/Debug/net6.0/RequirementsTests.Console.AssemblyInfo.cs
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/UI/RequirementsTests.Console/obj/Debug/net6.0/RequirementsTests.Console.csproj.CoreCompileInputs.cache
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/UI/RequirementsTests.Console/obj/Debug/net6.0/RequirementsTests.Console.dll
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/UI/RequirementsTests.Console/obj/Debug/net6.0/refint/RequirementsTests.Console.dll
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/UI/RequirementsTests.Console/obj/Debug/net6.0/RequirementsTests.Console.pdb
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/UI/RequirementsTests.Console/obj/Debug/net6.0/RequirementsTests.Console.genruntimeconfig.cache
+/home/anisimov/Work/OneDrive/Documents/VisualStudio2019/Sber/RequirementsTests/UI/RequirementsTests.Console/obj/Debug/net6.0/ref/RequirementsTests.Console.dll

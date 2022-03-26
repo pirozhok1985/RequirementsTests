@@ -1,3 +1,5 @@
+using System;
+
 namespace RequirementsTests.Domain.Models.InventoryInfoTypes;
 
 public class CertificateInfo
