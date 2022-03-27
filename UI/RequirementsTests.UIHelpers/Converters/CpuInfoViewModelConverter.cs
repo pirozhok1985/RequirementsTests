@@ -1,7 +1,7 @@
-using RequirementsTests.Console.ViewModels;
 using RequirementsTests.Domain.Models.InventoryInfoTypes;
+using RequirementsTests.UIHelpers.ViewModels;
 
-namespace RequirementsTests.Console.Converters;
+namespace RequirementsTests.UIHelpers.Converters;
 
 public static class CpuInfoViewModelConverter
 {
