@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RequirementsTests.Domain.Models;
 using RequirementsTests.Domain.Models.InventoryInfoTypes;
 using RequirementsTests.Services.UseCases.LinuxInfo;
 using Assert = Xunit.Assert;
@@ -16,69 +14,59 @@ public class HardwareInfoTests
     [TestMethod]
     public async Task CheckIfGetModelInfoReturnsCorrectValue()
     {
-        var resultModel = await new HardwareInfo().GetModelInfoAsync();
+        const string expectedName = "GeneralDeviceInfo";
+        var deviceInfo = await new HardwareInfo().GetGeneralDeviceInfoAsync();
 
-        Assert.IsType<Info<string>>(resultModel);
-        Assert.NotEmpty(resultModel.Value!);
-        Assert.Equal(ExpectedCategory,resultModel.Category!.Name);
-    }  
-    
-    [TestMethod]
-    public async Task CheckIfGetVendorInfoReturnsCorrectValue()
-    {
-        var resultVendor = await new HardwareInfo().GetVendorInfoAsync();
+        Assert.IsType<GeneralDeviceInfo>(deviceInfo);
+        Assert.NotNull(deviceInfo);
+        Assert.NotNull(deviceInfo.Model);
+        Assert.NotNull(deviceInfo.Vendor);
+        Assert.Equal(ExpectedCategory,deviceInfo.Category!.Name);
+        Assert.Equal(expectedName, deviceInfo.Name);
+    }
 
-        Assert.IsType<Info<string>>(resultVendor);
-        Assert.NotEmpty(resultVendor.Value!);
-        Assert.Equal(ExpectedCategory,resultVendor.Category!.Name);
-    }    
-    
-    // [TestMethod]
-    // public async Task CheckIfGetSerialNumberInfoReturnsCorrectValue() //Permission denied - Test Failed!
-    // {
-    //     var resultSerial = await new HardwareInfo().GetSerialNumberInfoAsync();
-    //
-    //     Assert.IsType<Info<string>>(resultSerial);
-    //     Assert.NotEmpty(resultSerial.Value!);
-    //     Assert.Equal(ExpectedCategory,resultSerial.Category!.Name);
-    // }  
-    
     [TestMethod]
     public async Task CheckIfGetRamInfoReturnsCorrectValue()
     {
-        var resultRam = await new HardwareInfo().GetRamInfoAsync();
+        const string expectedName = "RamInfo";
+        var ramInfo = await new HardwareInfo().GetRamInfoAsync();
 
-        Assert.IsType<Info<RamInfo>>(resultRam);
-        Assert.NotNull(resultRam.Value);
-        Assert.NotEqual(0, resultRam.Value?.Free);
-        Assert.NotEqual(0, resultRam.Value?.Total);
-        Assert.Equal(ExpectedCategory,resultRam.Category!.Name);
+        Assert.IsType<RamInfo>(ramInfo);
+        Assert.NotNull(ramInfo);
+        Assert.NotEqual(0, ramInfo.Free);
+        Assert.NotEqual(0, ramInfo.Total);
+        Assert.Equal(ExpectedCategory,ramInfo.Category!.Name);
+        Assert.Equal(expectedName, ramInfo.Name);
     }  
     
     [TestMethod]
     public async Task CheckIfGetCpuInfoReturnsCorrectValue()
     {
-        var resultCpu = await new HardwareInfo().GetCpuInfoAsync();
+        const string expectedName = "CpuInfo";
+        var cpuInfo = await new HardwareInfo().GetCpuInfoAsync();
 
-        Assert.IsType<Info<CpuInfo>>(resultCpu);
-        Assert.NotNull(resultCpu.Value);
-        Assert.NotNull(resultCpu.Value?.Model);
-        Assert.NotEqual(0,resultCpu.Value?.CoresCount);
-        Assert.Equal(ExpectedCategory,resultCpu.Category!.Name);
+        Assert.IsType<CpuInfo>(cpuInfo);
+        Assert.NotNull(cpuInfo);
+        Assert.NotNull(cpuInfo.Model);
+        Assert.NotEqual(0,cpuInfo.CoresCount);
+        Assert.Equal(ExpectedCategory,cpuInfo.Category!.Name);
+        Assert.Equal(expectedName, cpuInfo.Name);
     }
 
     [TestMethod]
     public async Task CheckIfGetFirmwareInfoReturnsCorrectValue()
     {
-        var resultFirmWare = await new HardwareInfo().GetFirmWareInfoAsync();
+        const string expectedName = "FirmwareInfo";
+        var firmWareInfo = await new HardwareInfo().GetFirmWareInfoAsync();
 
-        Assert.IsType<Info<FirmwareInfo>>(resultFirmWare);
-        Assert.NotNull(resultFirmWare.Value);
-        Assert.NotNull(resultFirmWare.Value?.Date);
-        Assert.NotNull(resultFirmWare.Value?.Release);
-        Assert.NotNull(resultFirmWare.Value?.Vendor);
-        Assert.NotNull(resultFirmWare.Value?.Version);
-        Assert.Equal(ExpectedCategory,resultFirmWare.Category!.Name);
+        Assert.IsType<FirmwareInfo>(firmWareInfo);
+        Assert.NotNull(firmWareInfo);
+        Assert.NotNull(firmWareInfo.Date);
+        Assert.NotNull(firmWareInfo.Release);
+        Assert.NotNull(firmWareInfo.Vendor);
+        Assert.NotNull(firmWareInfo.Version);
+        Assert.Equal(ExpectedCategory,firmWareInfo.Category!.Name);
+        Assert.Equal(expectedName, firmWareInfo.Name);
     }
     
 }

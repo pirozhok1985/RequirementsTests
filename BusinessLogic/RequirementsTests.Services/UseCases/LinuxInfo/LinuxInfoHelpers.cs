@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using RequirementsTests.Domain.Base;
 using RequirementsTests.Domain.Models;
 
 namespace RequirementsTests.Services.UseCases.LinuxInfo;
@@ -41,17 +42,13 @@ public static class LinuxInfoHelpers
 
     #endregion
     
-    public static Info<T> GenerateInfo<T>(T value, string categoryName, string name,
+    public static IBaseInfo GenerateInfo(IBaseInfo obj, string categoryName, string name,
         string description = "For future needs")
     {
-        var info = new Info<T>
-        {
-            Name = name,
-            Category = new InfoCategory {Name = categoryName},
-            Value = value,
-            Description = description,
-        };
-        return info;
+        obj.Category = new CategoryInfo {Name = categoryName};
+        obj.Description = description;
+        obj.Name = name;
+        return obj;
     }
 
     public static async Task<string> ReadToTheEndAsync(string path)

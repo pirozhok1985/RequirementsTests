@@ -1,6 +1,8 @@
+using RequirementsTests.Domain.Base;
+
 namespace RequirementsTests.Domain.Models.InventoryInfoTypes;
 
-public class NetworkConfigInfo
+public class NetworkConfigInfo : BaseInfo, IBaseInfo
 {
     public string[]? IpAddresses { get; set; }
     public string? Gateway { get; set; }

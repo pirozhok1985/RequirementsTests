@@ -1,6 +1,8 @@
+using RequirementsTests.Domain.Base;
+
 namespace RequirementsTests.Domain.Models.InventoryInfoTypes;
 
-public class DiskDrivePartitionInfo
+public class DiskDrivePartitionInfo : BaseInfo, IBaseInfo
 {
     public string? PartName { get; set; }
     public string? DiskDriveModel { get; set; }

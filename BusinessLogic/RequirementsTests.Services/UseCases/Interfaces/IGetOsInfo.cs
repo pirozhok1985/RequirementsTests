@@ -5,10 +5,10 @@ namespace RequirementsTests.Services.UseCases.Interfaces;
 
 public interface IGetOsInfo
 {
-    public Task<Info<OsInfo>> GetOsInfoAsync();
-    public Task<Info<IList<NetworkConfigInfo>>> GetNetworkConfigInfoAsync();
-    public Task<Info<IList<DiskDrivePartitionInfo>>> GetDiskDrivePartitionInfoAsync();
-    public Task<Info<IList<CertificateInfo>>> GetCertificateInfoAsync();
+    public Task<OsInfo> GetOsInfoAsync();
+    public Task<IList<NetworkConfigInfo>> GetNetworkConfigInfoAsync();
+    public Task<IList<DiskDrivePartitionInfo>> GetDiskDrivePartitionInfoAsync();
+    public Task<IList<CertificateInfo>> GetCertificateInfoAsync();
     // public Info<T> GetDiskDriveEncryptionInfo();
     // public Info<T> GetAdDomainInfo();
 }

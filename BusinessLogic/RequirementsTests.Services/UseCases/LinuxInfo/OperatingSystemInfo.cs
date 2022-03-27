@@ -1,9 +1,6 @@
 using System.Net.NetworkInformation;
-using System.Net.Security;
-using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
-using RequirementsTests.Domain.Models;
 using RequirementsTests.Domain.Models.InventoryInfoTypes;
 using RequirementsTests.Services.UseCases.Interfaces;
 
@@ -13,37 +10,37 @@ public class OperatingSystemInfo : IGetOsInfo
 {
     private const string CategoryName = "Operating system";
 
-    public async Task<Info<OsInfo>> GetOsInfoAsync()
+    public async Task<OsInfo> GetOsInfoAsync()
     {
-        var osInfo = new OsInfo();
-        var result = await LinuxInfoHelpers.ReadToTheEndAsync("/etc/lsb-release");
-        var query = result.Split("\n").Where(e => e != String.Empty)
+        var osInfo = LinuxInfoHelpers.GenerateInfo(new OsInfo(),CategoryName,nameof(OsInfo)) as OsInfo;
+        var readFileResult = await LinuxInfoHelpers.ReadToTheEndAsync("/etc/lsb-release");
+        var query = readFileResult.Split("\n").Where(e => e != String.Empty)
             .ToDictionary(k => k.Split("=")[0], v => v.Split("=")[1]);
         foreach (var kv in query)
         {
             switch (kv.Key)
             {
                 case "DISTRIB_CODENAME":
-                    osInfo.CodeName = kv.Value;
+                    osInfo!.CodeName = kv.Value;
                     break;
                 case "DISTRIB_ID":
-                    osInfo.Id = kv.Value;
+                    osInfo!.Id = kv.Value;
                     break;
                 case "DISTRIB_RELEASE":
-                    osInfo.Release = kv.Value;
+                    osInfo!.Release = kv.Value;
                     break;
                 case "DISTRIB_DESCRIPTION":
-                    osInfo.Description = kv.Value;
+                    osInfo!.Description = kv.Value;
                     break;
             }
         }
 
-        return LinuxInfoHelpers.GenerateInfo(osInfo, CategoryName, "Os Info");
+        return osInfo!;
     }
 
-    public async Task<Info<IList<NetworkConfigInfo>>> GetNetworkConfigInfoAsync()
+    public async Task<IList<NetworkConfigInfo>> GetNetworkConfigInfoAsync()
     {
-        IList<NetworkConfigInfo> result = new List<NetworkConfigInfo>();
+        IList<NetworkConfigInfo> networkConfigInfos = new List<NetworkConfigInfo>();
         await Task.Run(() =>
         {
             var nics = NetworkInterface.GetAllNetworkInterfaces()
@@ -51,19 +48,21 @@ public class OperatingSystemInfo : IGetOsInfo
                 .Where(i => !i.Name.Contains("docker"));
             foreach (var nic in nics)
             {
-                result.Add( new NetworkConfigInfo()
-                {
-                    IpAddresses = nic.GetIPProperties().UnicastAddresses.Select(a => a.Address.ToString()).ToArray(),
-                    Gateway = nic.GetIPProperties().GatewayAddresses.Select(g => g.Address.ToString()).FirstOrDefault()!,
-                    DnsServers = nic.GetIPProperties().DnsAddresses.Select(d => d.ToString()).ToArray(),
-                    InterfaceName = nic.Name
-                });
+                var networkConfigInfo =
+                    LinuxInfoHelpers.GenerateInfo(new NetworkConfigInfo(), CategoryName, nameof(NetworkConfigInfo)) as
+                        NetworkConfigInfo;
+                networkConfigInfo!.IpAddresses = nic.GetIPProperties().UnicastAddresses.Select(a => a.Address.ToString()).ToArray();
+                networkConfigInfo.Gateway = nic.GetIPProperties().GatewayAddresses.Select(g => g.Address.ToString())
+                        .FirstOrDefault()!;
+                networkConfigInfo.DnsServers = nic.GetIPProperties().DnsAddresses.Select(d => d.ToString()).ToArray();
+                networkConfigInfo.InterfaceName = nic.Name;
+                networkConfigInfos.Add(networkConfigInfo);
             }
         });
-        return LinuxInfoHelpers.GenerateInfo(result, CategoryName, "Network Config");
+        return networkConfigInfos;
     }
 
-    public async Task<Info<IList<DiskDrivePartitionInfo>>> GetDiskDrivePartitionInfoAsync()
+    public async Task<IList<DiskDrivePartitionInfo>> GetDiskDrivePartitionInfoAsync()
     {
         IList<DiskDrivePartitionInfo> diskDrivePartitionInfoList  = new List<DiskDrivePartitionInfo>();
         var devDirName = Directory.EnumerateDirectories("/sys/block/").Where(d => !d.Contains("loop"));
@@ -72,20 +71,19 @@ public class OperatingSystemInfo : IGetOsInfo
              diskDrivePartitionInfoList.Add(await CreateDiskDrivePartitionInfoAsync(devDir));
         }
 
-        return LinuxInfoHelpers.GenerateInfo(diskDrivePartitionInfoList, CategoryName, "Partition configuration");
+        return diskDrivePartitionInfoList;
     }
 
     private async Task<DiskDrivePartitionInfo> CreateDiskDrivePartitionInfoAsync(string devDir)
     {
-        var partInfo = new DiskDrivePartitionInfo();
-        partInfo.DiskDriveModel = await LinuxInfoHelpers.ReadToTheEndAsync($@"{devDir}/device/model");
+        var partInfo = LinuxInfoHelpers.GenerateInfo(new DiskDrivePartitionInfo(),CategoryName,nameof(DiskDrivePartitionInfo)) as DiskDrivePartitionInfo;
+        partInfo!.DiskDriveModel = await LinuxInfoHelpers.ReadToTheEndAsync($@"{devDir}/device/model");
         var partNum = GetPartitionNumber(devDir, out string devName, out nint partListPointer);
         for (int i = 0; i < partNum; i++)
         {
             partInfo.PartUuid = GetPartitionInfo(devName, partListPointer, i, "PartUuid");
             partInfo.PartLabel = GetPartitionInfo(devName, partListPointer, i, "PartLabel");
             partInfo.Label = GetPartitionInfo(devName, partListPointer, i, "LABEL");
-            ;
             partInfo.Type = GetPartitionInfo(devName, partListPointer, i, "TYPE");
             partInfo.PartName = devName;
             partInfo.Uuid = GetPartitionInfo(devName, partListPointer, i, "UUID");
@@ -118,7 +116,7 @@ public class OperatingSystemInfo : IGetOsInfo
         return value;
     }
 
-    public async Task<Info<IList<CertificateInfo>>> GetCertificateInfoAsync()
+    public async Task<IList<CertificateInfo>> GetCertificateInfoAsync()
     {
         IList<CertificateInfo> certificateInfoList = new List<CertificateInfo>();
         await Task.Run(() =>
@@ -130,7 +128,7 @@ public class OperatingSystemInfo : IGetOsInfo
             }
         });
 
-        return LinuxInfoHelpers.GenerateInfo(certificateInfoList, CategoryName, "Root Certificate Information");
+        return certificateInfoList;
     }
 
     private CertificateInfo GetCertificateInfoFromFile(string pathToFile)
@@ -139,12 +137,11 @@ public class OperatingSystemInfo : IGetOsInfo
         using var memStream = new MemoryStream();
         fileStream.CopyTo(memStream);
         var rawX509CertData = new X509Certificate2(memStream.ToArray());
-        var certificateInfo = new CertificateInfo()
-        {
-            Name = rawX509CertData.FriendlyName,
-            EffectiveDate = rawX509CertData.NotBefore,
-            ExpirationDate = rawX509CertData.NotAfter
-        };
+        var certificateInfo = LinuxInfoHelpers.GenerateInfo(new CertificateInfo(),CategoryName,nameof(CertificateInfo)) as CertificateInfo;
+        certificateInfo!.CertificateName = rawX509CertData.FriendlyName;
+        certificateInfo.EffectiveDate = rawX509CertData.NotBefore;
+        certificateInfo.ExpirationDate = rawX509CertData.NotAfter;
+        
         return certificateInfo;
     }
 }
