@@ -1,6 +1,6 @@
 namespace RequirementsTests.Console.ViewModels;
 
-public class DiskDrivePartitionInfo
+public class DiskDrivePartitionInfoViewModel
 {
     public string? PartName { get; set; }
     public string? DiskDriveModel { get; set; }

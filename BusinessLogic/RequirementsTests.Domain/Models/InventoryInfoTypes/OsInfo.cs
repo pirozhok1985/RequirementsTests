@@ -4,8 +4,8 @@ namespace RequirementsTests.Domain.Models.InventoryInfoTypes;
 
 public class OsInfo : BaseInfo, IBaseInfo
 {
-    public string? Id { get; set; }
-    public string? Release { get; set; }
-    public string? CodeName { get; set; }
-    public string? Description { get; set; }
+    public string? DistribId { get; set; }
+    public string? DistribRelease { get; set; }
+    public string? DistribCodeName { get; set; }
+    public string? DistribDescription { get; set; }
 }

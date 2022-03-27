@@ -21,16 +21,16 @@ public class OperatingSystemInfo : IGetOsInfo
             switch (kv.Key)
             {
                 case "DISTRIB_CODENAME":
-                    osInfo!.CodeName = kv.Value;
+                    osInfo!.DistribCodeName = kv.Value;
                     break;
                 case "DISTRIB_ID":
-                    osInfo!.Id = kv.Value;
+                    osInfo!.DistribId = kv.Value;
                     break;
                 case "DISTRIB_RELEASE":
-                    osInfo!.Release = kv.Value;
+                    osInfo!.DistribRelease = kv.Value;
                     break;
                 case "DISTRIB_DESCRIPTION":
-                    osInfo!.Description = kv.Value;
+                    osInfo!.DistribDescription = kv.Value;
                     break;
             }
         }

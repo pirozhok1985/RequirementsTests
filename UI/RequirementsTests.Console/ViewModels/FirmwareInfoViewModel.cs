@@ -1,6 +1,6 @@
 namespace RequirementsTests.Console.ViewModels;
 
-public class FirmwareInfo
+public class FirmwareInfoViewModel
 {
     public string? Version { get; set; }
     public string? Vendor { get; set; }

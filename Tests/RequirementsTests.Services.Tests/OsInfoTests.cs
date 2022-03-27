@@ -21,10 +21,10 @@ public class OsInfoTests
 
         Assert.IsType<OsInfo>(osInfo);
         Assert.NotNull(osInfo);
-        Assert.NotNull(osInfo.CodeName);
-        Assert.NotNull(osInfo.Description);
-        Assert.NotNull(osInfo.Release);
-        Assert.NotNull(osInfo.Id);
+        Assert.NotNull(osInfo.DistribCodeName);
+        Assert.NotNull(osInfo.DistribDescription);
+        Assert.NotNull(osInfo.DistribRelease);
+        Assert.NotNull(osInfo.DistribId);
         Assert.Equal(ExpectedCategory,osInfo.Category!.Name);
         Assert.Equal(expectedName, osInfo.Name);
     }  

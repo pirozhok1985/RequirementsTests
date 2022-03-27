@@ -1,6 +1,6 @@
 namespace RequirementsTests.Console.ViewModels;
 
-public class GeneralDeviceInfo
+public class GeneralDeviceInfoViewModel
 {
     public string? Vendor { get; set; }
     public string? Model { get; set; }
