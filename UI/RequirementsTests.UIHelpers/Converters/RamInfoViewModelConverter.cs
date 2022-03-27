@@ -1,7 +1,7 @@
-using RequirementsTests.Console.ViewModels;
 using RequirementsTests.Domain.Models.InventoryInfoTypes;
+using RequirementsTests.UIHelpers.ViewModels;
 
-namespace RequirementsTests.Console.Converters;
+namespace RequirementsTests.UIHelpers.Converters;
 
 public static class RamInfoViewModelConverter
 {
@@ -9,8 +9,8 @@ public static class RamInfoViewModelConverter
     {
         return new RamInfoViewModel()
         {
-            Free = ramInfo.Free.ToString(),
-            Total = ramInfo.Total.ToString(),
+            Free = $"{ramInfo.Free / 1024} MB",
+            Total = $"{ramInfo.Total / 1024} MB",
         };
     }
 }

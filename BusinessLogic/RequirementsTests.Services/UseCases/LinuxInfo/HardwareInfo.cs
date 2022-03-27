@@ -13,9 +13,9 @@ public class HardwareInfo : IGetHardwareInfo
     {
         var generalDeviceInfo =
             LinuxInfoHelpers.GenerateInfo(new GeneralDeviceInfo(), CategoryName, nameof(GeneralDeviceInfo)) as GeneralDeviceInfo;
-        var vendor = await LinuxInfoHelpers.ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/board_vendor");
-        var model = await LinuxInfoHelpers.ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/product_name");
-        // var serial = await LinuxInfoHelpers.ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/product_serial");
+        var vendor = (await LinuxInfoHelpers.ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/board_vendor")).Replace("\n","");
+        var model = (await LinuxInfoHelpers.ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/product_name")).Replace("\n","");
+        // var serial = (await LinuxInfoHelpers.ReadToTheEndAsync(@"/sys/devices/virtual/dmi/id/product_serial")).Replace("\n","");
         generalDeviceInfo!.Vendor = vendor;
         generalDeviceInfo.Model = model;
         // generalDeviceInfo.SerialNumber = serial;
@@ -55,10 +55,10 @@ public class HardwareInfo : IGetHardwareInfo
     {
         var firmWareInfo =
             LinuxInfoHelpers.GenerateInfo(new FirmwareInfo(), CategoryName, nameof(FirmwareInfo)) as FirmwareInfo;
-        firmWareInfo!.Date = await LinuxInfoHelpers.ReadToTheEndAsync($@"/sys/devices/virtual/dmi/id/bios_date");
-        firmWareInfo.Release = await LinuxInfoHelpers.ReadToTheEndAsync($@"/sys/devices/virtual/dmi/id/bios_release");
-        firmWareInfo.Vendor = await LinuxInfoHelpers.ReadToTheEndAsync($@"/sys/devices/virtual/dmi/id/bios_vendor");
-        firmWareInfo.Version = await LinuxInfoHelpers.ReadToTheEndAsync($@"/sys/devices/virtual/dmi/id/bios_version");
+        firmWareInfo!.Date = (await LinuxInfoHelpers.ReadToTheEndAsync($@"/sys/devices/virtual/dmi/id/bios_date")).Replace("\n","");
+        firmWareInfo.Release = (await LinuxInfoHelpers.ReadToTheEndAsync($@"/sys/devices/virtual/dmi/id/bios_release")).Replace("\n","");
+        firmWareInfo.Vendor = (await LinuxInfoHelpers.ReadToTheEndAsync($@"/sys/devices/virtual/dmi/id/bios_vendor")).Replace("\n","");
+        firmWareInfo.Version = (await LinuxInfoHelpers.ReadToTheEndAsync($@"/sys/devices/virtual/dmi/id/bios_version")).Replace("\n","");
 
         return firmWareInfo;
     }

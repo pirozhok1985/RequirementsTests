@@ -138,7 +138,7 @@ public class OperatingSystemInfo : IGetOsInfo
         fileStream.CopyTo(memStream);
         var rawX509CertData = new X509Certificate2(memStream.ToArray());
         var certificateInfo = LinuxInfoHelpers.GenerateInfo(new CertificateInfo(),CategoryName,nameof(CertificateInfo)) as CertificateInfo;
-        certificateInfo!.CertificateName = rawX509CertData.FriendlyName;
+        certificateInfo!.CertificateName = rawX509CertData.Subject.Split(",")[0].Split("=")[1];
         certificateInfo.EffectiveDate = rawX509CertData.NotBefore;
         certificateInfo.ExpirationDate = rawX509CertData.NotAfter;
         
