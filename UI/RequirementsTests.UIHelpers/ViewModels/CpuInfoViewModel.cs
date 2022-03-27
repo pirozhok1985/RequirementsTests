@@ -1,4 +1,4 @@
-namespace RequirementsTests.Console.ViewModels;
+namespace RequirementsTests.UIHelpers.ViewModels;
 
 public class CpuInfoViewModel
 {
