@@ -62,34 +62,37 @@ public class OperatingSystemInfo : IGetOsInfo
         return networkConfigInfos;
     }
 
-    public async Task<IList<DiskDrivePartitionInfo>> GetDiskDrivePartitionInfoAsync()
+    public async Task<Dictionary<string,IList<DiskDrivePartitionInfo>>> GetDiskDrivePartitionInfoAsync()
     {
-        IList<DiskDrivePartitionInfo> diskDrivePartitionInfoList  = new List<DiskDrivePartitionInfo>();
+        Dictionary<string,IList<DiskDrivePartitionInfo>> diskDrivePartitionInfoList  = new Dictionary<string, IList<DiskDrivePartitionInfo>>();
         var devDirName = Directory.EnumerateDirectories("/sys/block/").Where(d => !d.Contains("loop"));
         foreach (var devDir in devDirName)
         {
-             diskDrivePartitionInfoList.Add(await CreateDiskDrivePartitionInfoAsync(devDir));
+            var driveInfo = await CreateDiskDrivePartitionInfoAsync(devDir);
+             diskDrivePartitionInfoList.Add(driveInfo.FirstOrDefault()!.DiskDriveModel!,driveInfo);
         }
 
         return diskDrivePartitionInfoList;
     }
 
-    private async Task<DiskDrivePartitionInfo> CreateDiskDrivePartitionInfoAsync(string devDir)
+    private async Task<IList<DiskDrivePartitionInfo>> CreateDiskDrivePartitionInfoAsync(string devDir)
     {
-        var partInfo = LinuxInfoHelpers.GenerateInfo(new DiskDrivePartitionInfo(),CategoryName,nameof(DiskDrivePartitionInfo)) as DiskDrivePartitionInfo;
-        partInfo!.DiskDriveModel = await LinuxInfoHelpers.ReadToTheEndAsync($@"{devDir}/device/model");
+        IList<DiskDrivePartitionInfo> partitionsInfo = new List<DiskDrivePartitionInfo>();
         var partNum = GetPartitionNumber(devDir, out string devName, out nint partListPointer);
         for (int i = 0; i < partNum; i++)
         {
+            var partInfo = LinuxInfoHelpers.GenerateInfo(new DiskDrivePartitionInfo(),CategoryName,nameof(DiskDrivePartitionInfo)) as DiskDrivePartitionInfo;
+            partInfo!.DiskDriveModel = (await LinuxInfoHelpers.ReadToTheEndAsync($@"{devDir}/device/model")).Trim().Replace("\n","");
             partInfo.PartUuid = GetPartitionInfo(devName, partListPointer, i, "PartUuid");
             partInfo.PartLabel = GetPartitionInfo(devName, partListPointer, i, "PartLabel");
             partInfo.Label = GetPartitionInfo(devName, partListPointer, i, "LABEL");
             partInfo.Type = GetPartitionInfo(devName, partListPointer, i, "TYPE");
-            partInfo.PartName = devName;
+            partInfo.PartName = devName.Contains("nvme") ? $"{devName}p{i+1}" : $"{devName}{i+1}";
             partInfo.Uuid = GetPartitionInfo(devName, partListPointer, i, "UUID");
+            partitionsInfo.Add(partInfo);
         }
-
-        return partInfo;
+        
+        return partitionsInfo;
     }
 
     private int GetPartitionNumber(string deviceDir, out string devName, out nint partListPointer)
