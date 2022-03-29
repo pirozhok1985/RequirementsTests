@@ -52,12 +52,12 @@ public class OsInfoTests
     {
         const string expectedName = "DiskDrivePartitionInfo";
         var partInfoList = await new OperatingSystemInfo().GetDiskDrivePartitionInfoAsync();
-        var partitionInfo = partInfoList.FirstOrDefault();
+        var partitionInfoKv = partInfoList.FirstOrDefault();
+        var partitionInfo = partitionInfoKv.Value.FirstOrDefault();
         
         Assert.IsType<DiskDrivePartitionInfo>(partitionInfo);
-        Assert.NotNull(partInfoList);
-        Assert.NotNull(partitionInfo!.PartLabel);
-        Assert.NotNull(partitionInfo.PartName);
+        Assert.NotNull(partitionInfo);
+        Assert.NotNull(partitionInfo!.PartName);
         Assert.NotNull(partitionInfo.PartUuid);
         Assert.NotNull(partitionInfo.DiskDriveModel);
         
