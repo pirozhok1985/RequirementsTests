@@ -10,7 +10,7 @@ var ramInfo = await hwInfo.GetRamInfoAsync();
 var certInfo = await osInfo.GetCertificateInfoAsync();
 var firmwareInfo = await hwInfo.GetFirmWareInfoAsync();
 var generalDeviceInfo = await hwInfo.GetGeneralDeviceInfoAsync();
-// var diskDrivePartitionInfo = await osInfo.GetDiskDrivePartitionInfoAsync();
+var diskDrivePartitionInfo = await osInfo.GetDiskDrivePartitionInfoAsync();
 // var netConfigInfo = await osInfo.GetNetworkConfigInfoAsync();
 // var operatingSystemInfo = await osInfo.GetOsInfoAsync();
 Console.WriteLine("========================Requirements Information and Testing================================\n\n");
@@ -55,7 +55,6 @@ Console.WriteLine("-------------------------------------------------------------
 
 
 Console.WriteLine("===============================Category: Operation System===========================================\n");
-
 Console.WriteLine("CertificateInfo:");
 Console.WriteLine("--------------------------------------------------------------------");
 Console.WriteLine("|        Certificate Name       | Effective Date | Expiration Date |");
@@ -67,4 +66,27 @@ foreach (var cert in certInfo)
         ,cert.ToViewModel().EffectiveDate
         ,cert.ToViewModel().ExpirationDate);
     Console.WriteLine("--------------------------------------------------------------------");
+}
+
+Console.WriteLine();
+
+Console.WriteLine("DiskDrivePartitionInfo:");
+
+foreach (var diskDrive in diskDrivePartitionInfo)
+{
+    Console.WriteLine("{0,60}",diskDrive.Key);
+    Console.WriteLine("----------------------------------------------------------------------------------------");
+    Console.WriteLine("|    PartName    |       PartLabel      |             Partition UUID            | Type |");
+    Console.WriteLine("----------------------------------------------------------------------------------------");
+    foreach (var partition in diskDrive.Value)
+    {
+        Console.WriteLine("|{0,15} |{1,21} |{2,38} |{3,5} |"
+            , partition.ToViewModel().PartName
+            , partition.ToViewModel().PartLabel
+            , partition.ToViewModel().PartUuid
+            , partition.ToViewModel().Type);
+        Console.WriteLine("----------------------------------------------------------------------------------------");
+    }
+
+    Console.WriteLine();
 }
