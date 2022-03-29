@@ -1,0 +1,9 @@
+/TestResults/
+bin
+debug
+/.idea/
+/.git/
+*.cache
+*.dll
+*.info
+.gitignore
